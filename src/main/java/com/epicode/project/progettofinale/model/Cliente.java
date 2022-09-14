@@ -1,7 +1,6 @@
 package com.epicode.project.progettofinale.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,10 +8,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
-@Setter
-@Entity
-@NoArgsConstructor
+@Getter @Setter @Entity
+
 public class Cliente {
 
     @Id

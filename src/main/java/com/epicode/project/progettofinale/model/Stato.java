@@ -13,6 +13,6 @@ public class Stato {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    @OneToMany(mappedBy="stato")
+    @OneToMany(mappedBy="stato",orphanRemoval = true)
     private List<Fattura> fatture;
 }

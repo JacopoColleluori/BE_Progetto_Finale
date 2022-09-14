@@ -3,11 +3,11 @@ package com.epicode.project.progettofinale.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
@@ -16,8 +16,8 @@ public class Fattura {
     private Long id;
 
     private Integer anno;
-
-    private Date date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
 
     private BigDecimal importo;
     @ManyToOne

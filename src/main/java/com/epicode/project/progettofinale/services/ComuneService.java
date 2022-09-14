@@ -1,13 +1,14 @@
 package com.epicode.project.progettofinale.services;
 
-import com.epicode.project.progettofinale.model.Comune;
+import com.epicode.project.progettofinale.model.dto.response.ComuneDTORes;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public interface ComuneService {
-    Page<Comune> getAll(Pageable pageable);
-    Optional<Comune> findByName(String name);
-    Optional<Comune> findById(Long id);
+    Page<ComuneDTORes> getAll();
+   ComuneDTORes findByName(String name);
+   ComuneDTORes findById(Long id);
 }
