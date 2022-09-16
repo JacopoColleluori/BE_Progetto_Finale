@@ -8,11 +8,14 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class Stato {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    @OneToMany(mappedBy="stato",orphanRemoval = true)
+    @OneToMany(mappedBy = "stato", orphanRemoval = true)
     private List<Fattura> fatture;
 }

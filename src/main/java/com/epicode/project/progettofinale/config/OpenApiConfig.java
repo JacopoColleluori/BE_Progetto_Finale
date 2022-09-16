@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
         info = @Info(
                 title = "Epic Energy Service",
                 description = "" +
-                        "Spring-Boot application to manage relationships between Books, Authors and Categories with Logins and Authorizations)",
+                        "Spring-Boot application that simulates a CRM system for a company",
                 contact = @Contact(
                         name = "JCTS",
                         url = "https://github.com/JacopoColleluori?tab=repositories",

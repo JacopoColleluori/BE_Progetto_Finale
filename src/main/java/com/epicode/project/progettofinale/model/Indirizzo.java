@@ -8,19 +8,22 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class Indirizzo {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     public String via;
     public int civico;
     private String localita;
-    private int cap;
+    private String cap;
     @ManyToOne
     private Comune comune;
-    @OneToMany(mappedBy="sedeLegale")
+    @OneToMany(mappedBy = "sedeLegale")
     private List<Cliente> clientiSedeLegale;
-    @OneToMany(mappedBy="sedeOperativa")
+    @OneToMany(mappedBy = "sedeOperativa")
     private List<Cliente> clientiSedeOperativa;
 }

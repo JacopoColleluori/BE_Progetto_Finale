@@ -1,5 +1,6 @@
 package com.epicode.project.progettofinale.model.dto.request;
 
+import com.epicode.project.progettofinale.model.EnumTipo;
 import com.epicode.project.progettofinale.model.Tipo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,5 +34,5 @@ public class ClienteDTOReq {
 
     private IndirizzoDTOReq sedeOperativa;
 
-    private Tipo tipo;
+    private EnumTipo tipo;
 }

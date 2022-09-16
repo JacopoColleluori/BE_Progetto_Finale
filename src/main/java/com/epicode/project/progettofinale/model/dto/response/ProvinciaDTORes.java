@@ -17,5 +17,4 @@ public class ProvinciaDTORes {
     private String sigla;
     private String regione;
 
-    private List<ComuneDTOResOnlyName> comuni;
 }

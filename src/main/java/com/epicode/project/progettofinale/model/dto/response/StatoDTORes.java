@@ -11,10 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class StatoDTORes
-{
+public class StatoDTORes {
 
     private String nome;
 
-    private List<FatturaDTORes> fatture;
 }

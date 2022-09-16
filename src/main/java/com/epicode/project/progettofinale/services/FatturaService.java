@@ -8,13 +8,16 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Service
+
 public interface FatturaService {
 
     //CRUD base
     Page<FatturaDTORes> getAll();
+
     FatturaDTORes save(FatturaDTOReq fattura);
+
     void delete(Long id);
+
     FatturaDTORes update(FatturaDTOReq fattura, Long id);
 
     //Filtraggio fatture
@@ -22,13 +25,11 @@ public interface FatturaService {
 
     Page<FatturaDTORes> filterByStato(String stato);
 
-    Page<FatturaDTORes> filterByData( LocalDate date);
+    Page<FatturaDTORes> filterByData(LocalDate date);
 
-    Page<FatturaDTORes> filterByAnno( Integer anno);
+    Page<FatturaDTORes> filterByAnno(Integer anno);
 
-    Page<FatturaDTORes> filterByRangeImporti( BigDecimal importoX, BigDecimal importoY);
-
-
+    Page<FatturaDTORes> filterByRangeImporti(Double importoX, Double importoY);
 
 
 }

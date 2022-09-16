@@ -2,14 +2,16 @@ package com.epicode.project.progettofinale.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter @Setter @Entity
-
+@Getter
+@Setter
+@Entity
 public class Cliente {
 
     @Id
@@ -34,9 +36,9 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente")
     private List<Fattura> fatture;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Indirizzo sedeLegale;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Indirizzo sedeOperativa;
     @ManyToOne
     private Tipo tipo;

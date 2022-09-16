@@ -1,6 +1,7 @@
 package com.epicode.project.progettofinale.model.dto.response;
 
 import com.epicode.project.progettofinale.model.Tipo;
+import com.epicode.project.progettofinale.model.dto.request.TipoDTOReq;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,11 +34,9 @@ public class ClienteDTORes {
     private Long telefonoContatto;
 
 
-    private List<FatturaDTORes> fatture;
-
     private IndirizzoDTORes sedeLegale;
 
     private IndirizzoDTORes sedeOperativa;
 
-    private Tipo tipo;
+    private TipoDTORes tipo;
 }

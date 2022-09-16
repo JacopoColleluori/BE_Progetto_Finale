@@ -1,6 +1,7 @@
 package com.epicode.project.progettofinale.controller.rest;
 
 import com.epicode.project.progettofinale.model.Indirizzo;
+import com.epicode.project.progettofinale.model.dto.response.IndirizzoDTORes;
 import com.epicode.project.progettofinale.services.IndirizzoService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +20,12 @@ public class IndirizzoController {
     private IndirizzoService indirizzoSrv;
 
     @GetMapping("getAll")
-    public ResponseEntity<Page<Indirizzo>> getAll(Pageable pageable) {
-        return null;
-    }
-
-    @GetMapping("{name}")
-    public ResponseEntity<Indirizzo> getByName(Pageable pageable, String name) {
-        return null;
+    public ResponseEntity<Page<IndirizzoDTORes>> getAll() {
+        return ResponseEntity.ok(indirizzoSrv.getAll());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Indirizzo> getById(Pageable pageable, Long id) {
-        return null;
+    public ResponseEntity<IndirizzoDTORes> getById(Long id) {
+        return ResponseEntity.ok(indirizzoSrv.getById(id));
     }
-
 }

@@ -4,7 +4,7 @@ import com.epicode.project.progettofinale.model.dto.response.IndirizzoDTORes;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-@Service
+
 public interface IndirizzoService {
     Page<IndirizzoDTORes> getAll();
 

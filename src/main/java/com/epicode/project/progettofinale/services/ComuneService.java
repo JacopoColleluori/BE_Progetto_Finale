@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
+
 public interface ComuneService {
     Page<ComuneDTORes> getAll();
-   ComuneDTORes findByName(String name);
-   ComuneDTORes findById(Long id);
+
+    ComuneDTORes findByName(String name);
+
+    ComuneDTORes findById(Long id);
 }

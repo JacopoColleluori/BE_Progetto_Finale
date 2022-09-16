@@ -1,16 +1,14 @@
 package com.epicode.project.progettofinale.controller.rest;
 
-import com.epicode.project.progettofinale.model.Fattura;
+import com.epicode.project.progettofinale.model.dto.request.FatturaDTOReq;
+import com.epicode.project.progettofinale.model.dto.response.FatturaDTORes;
 import com.epicode.project.progettofinale.services.FatturaService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,30 +21,39 @@ public class FatturaController {
     private FatturaService fatturaSrv;
 
     @GetMapping("getAll")
-    ResponseEntity<Page<Fattura>> getAll(){
-        return null;
+    ResponseEntity<Page<FatturaDTORes>> getAll(){
+        return ResponseEntity.ok(fatturaSrv.getAll());
     }
     @GetMapping("filterByCliente/{nome}")
-    ResponseEntity<Page<Fattura>> filterByCliente(Pageable pageable, @PathVariable String nome){
-        return null;
+    ResponseEntity<Page<FatturaDTORes>> filterByCliente( @PathVariable String nome){
+        return ResponseEntity.ok(fatturaSrv.filterByCliente(nome));
     }
 
     @GetMapping("filterByStato/{stato}")
-    ResponseEntity<Page<Fattura>> filterByStato(Pageable pageable, @PathVariable String stato){
-        return null;
+    ResponseEntity<Page<FatturaDTORes>> filterByStato( @PathVariable String stato){
+        return ResponseEntity.ok(fatturaSrv.filterByStato(stato));
     }
 
     @GetMapping("filterByData/{data}")
-    ResponseEntity<Page<Fattura>> filterByData(Pageable pageable, @PathVariable LocalDate data ){
-   return null;
+    ResponseEntity<Page<FatturaDTORes>> filterByData( @PathVariable LocalDate data ){
+   return ResponseEntity.ok(fatturaSrv.filterByData(data));
     }
     @GetMapping("filterByAnno/{anno}")
-    ResponseEntity<Page<Fattura>> filterByAnno(Pageable pageable, @PathVariable Integer data ){
-        return null;
+    ResponseEntity<Page<FatturaDTORes>> filterByAnno( @PathVariable Integer anno ){
+        return ResponseEntity.ok(fatturaSrv.filterByAnno(anno));
     }
-    @GetMapping("filterByImporti/{importoX}/{importoY}}")
-    ResponseEntity<Page<Fattura>> filterByImporti(Pageable pageable, @PathVariable BigDecimal importoX,@PathVariable BigDecimal importoY ){
-        return null;
+    @GetMapping("filterByImporti/{importoX}/{importoY}")
+    ResponseEntity<Page<FatturaDTORes>> filterByImporti( @PathVariable Double importoX,@PathVariable Double importoY ){
+        return ResponseEntity.ok(fatturaSrv.filterByRangeImporti(importoX,importoY));
     }
 
+    @PostMapping("create")
+    ResponseEntity<FatturaDTORes> create(@RequestBody FatturaDTOReq fatturaReq){
+        return new ResponseEntity<FatturaDTORes>(fatturaSrv.save(fatturaReq), HttpStatus.CREATED);
+    }
+
+    @PutMapping("update/{id}")
+    ResponseEntity<FatturaDTORes> update(@RequestBody FatturaDTOReq fatturaReq,@PathVariable Long id){
+        return new ResponseEntity<FatturaDTORes>(fatturaSrv.update(fatturaReq,id), HttpStatus.OK);
+    }
 }

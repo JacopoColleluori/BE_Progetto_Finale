@@ -1,6 +1,7 @@
 package com.epicode.project.progettofinale.controller.rest;
 
 import com.epicode.project.progettofinale.model.Stato;
+import com.epicode.project.progettofinale.model.dto.response.StatoDTORes;
 import com.epicode.project.progettofinale.services.StatoService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 @SecurityRequirement(name="bearerAuth")
 public class StatoController {
     @Autowired
-    StatoService statoSrv;
+    private StatoService statoSrv;
     @GetMapping("getAll")
-    public ResponseEntity<Page<Stato>> getAll(Pageable pageable) {
-        return null;
+    public ResponseEntity<Page<StatoDTORes>> getAll() {
+        return ResponseEntity.ok(statoSrv.getAll());
     }
 
     @GetMapping("{name}")
-    public ResponseEntity <Stato> getByName(Pageable pageable,String name) {
-        return null;
+    public ResponseEntity <StatoDTORes> getByName(String name) {
+        return ResponseEntity.ok(statoSrv.findByName(name));
     }
     @GetMapping("{id}")
-    public ResponseEntity <Stato> getById(Pageable pageable,Long id) {
-        return null;
+    public ResponseEntity <StatoDTORes> getById(Long id) {
+        return ResponseEntity.ok(statoSrv.findById(id));
     }
 
 }

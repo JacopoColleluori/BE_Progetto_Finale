@@ -1,11 +1,14 @@
 package com.epicode.project.progettofinale.controller.rest;
 
 import com.epicode.project.progettofinale.model.Cliente;
+import com.epicode.project.progettofinale.model.dto.request.ClienteDTOReq;
+import com.epicode.project.progettofinale.model.dto.response.ClienteDTORes;
 import com.epicode.project.progettofinale.services.ClienteService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,64 +23,65 @@ public class ClienteController {
     private ClienteService clienteSrv;
 
     @GetMapping("getAll")
-    public ResponseEntity<Page<Cliente>> findAll(Pageable pageable){
-        return null;
+    public ResponseEntity<Page<ClienteDTORes>> findAll(){
+        return  ResponseEntity.ok(clienteSrv.getAll());
     }
 
     @GetMapping("filtroPerFatturato/{fatturatoX}/{fatturatoY}")
-    public ResponseEntity<Page<Cliente>> filterByFatturato(Pageable pageable, @PathVariable Long fatturatoX, @PathVariable Long FatturatoY){
-        return null;
+    public ResponseEntity<Page<ClienteDTORes>> filterByFatturato( @PathVariable Long fatturatoX, @PathVariable Long FatturatoY){
+        return ResponseEntity.ok(clienteSrv.filterByFatturato(fatturatoX, FatturatoY));
     }
     @GetMapping("filtroPerDataInserimento/{data}")
-    public ResponseEntity<Page<Cliente>> filterByDataInserimento(Pageable pageable, @PathVariable LocalDate data){
-        return null;
+    public ResponseEntity<Page<ClienteDTORes>> filterByDataInserimento( @PathVariable LocalDate data){
+        return ResponseEntity.ok(clienteSrv.filterByDataInserimento(data));
     }
 
     @GetMapping("filtroPerDataUltimoContatto/{data}")
-    public ResponseEntity<Page<Cliente>> filterByDataUltimoContatto(Pageable pageable, @PathVariable LocalDate data){
-        return null;
+    public ResponseEntity<Page<ClienteDTORes>> filterByDataUltimoContatto( @PathVariable LocalDate data){
+        return ResponseEntity.ok(clienteSrv.filterByDataUltimoContatto(data));
     }
     @GetMapping("filtroPerNomeParziale/{nome}")
-    public ResponseEntity<Page<Cliente>> filterByNome(Pageable pageable, @PathVariable String nome){
-        return null;
+    public ResponseEntity<Page<ClienteDTORes>> filterByNome( @PathVariable String nome){
+        return ResponseEntity.ok(clienteSrv.filterByPartialName(nome));
     }
 
     @GetMapping("filtroPerId/{id}")
-    public ResponseEntity<Page<Cliente>> filterById(Pageable pageable, @PathVariable Long id){
-        return null;
+    public ResponseEntity<ClienteDTORes> filterById( @PathVariable Long id){
+        return ResponseEntity.ok(clienteSrv.filterById(id));
     }
 
     @GetMapping("orderByName")
-    public ResponseEntity<Page<Cliente>> orderByName(Pageable pageable){
-        return null;
+    public ResponseEntity<Page<ClienteDTORes>> orderByName(){
+        return ResponseEntity.ok(clienteSrv.orderByName());
     }
     @GetMapping("orderByFatturato")
-    public ResponseEntity<Page<Cliente>> orderByFatturato(Pageable pageable){
-        return null;
+    public ResponseEntity<Page<ClienteDTORes>> orderByFatturato(){
+        return ResponseEntity.ok(clienteSrv.orderByFatturato());
     }
     @GetMapping("orderByDataInserimento")
-    public ResponseEntity<Page<Cliente>> orderByDataInserimento(Pageable pageable){
-        return null;
+    public ResponseEntity<Page<ClienteDTORes>> orderByDataInserimento(){
+        return ResponseEntity.ok(clienteSrv.orderByDataInserimento());
     }
     @GetMapping("orderByDataUltimoContatto")
-    public ResponseEntity<Page<Cliente>> orderByDataUltimoContatto(Pageable pageable){
-        return null;
+    public ResponseEntity<Page<ClienteDTORes>> orderByDataUltimoContatto(){
+        return ResponseEntity.ok(clienteSrv.orderByDataUltimoContatto());
     }
     @GetMapping("orderByProvinciaSedeLegale")
-    public ResponseEntity<Page<Cliente>> orderByProvinciaSedeLegale(Pageable pageable){
-        return null;
+    public ResponseEntity<Page<ClienteDTORes>> orderByProvinciaSedeLegale(){
+        return ResponseEntity.ok(clienteSrv.orderByProvinciaSedeLegale());
     }
 
     @PostMapping("aggiungi")
-    public ResponseEntity<Cliente> create(@RequestBody Cliente cliente){
-        return null;
+    public ResponseEntity<ClienteDTORes> create(@RequestBody ClienteDTOReq clienteReq){
+        return new  ResponseEntity<ClienteDTORes>(clienteSrv.save(clienteReq),HttpStatus.CREATED);
     }
-    @PutMapping("{id}")
-    public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente cliente){
-        return null;
+    @PutMapping("update/{id}")
+    public ResponseEntity<ClienteDTORes> update(@PathVariable Long id, @RequestBody ClienteDTOReq clienteReq){
+        return ResponseEntity.ok(clienteSrv.update( clienteReq,id));
     }
     @DeleteMapping("{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
-        return null;
+        clienteSrv.delete(id);
+        return ResponseEntity.ok("eliminazione dell'utente con id: "+id+" effettuata");
     }
 }

@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class FatturaDTOReq {
     private Integer anno;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
+    private LocalDate data;
 
     private BigDecimal importo;
 

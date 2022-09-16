@@ -1,6 +1,5 @@
 package com.epicode.project.progettofinale.services;
 
-import com.epicode.project.progettofinale.model.Cliente;
 import com.epicode.project.progettofinale.model.dto.request.ClienteDTOReq;
 import com.epicode.project.progettofinale.model.dto.response.ClienteDTORes;
 import org.springframework.data.domain.Page;
@@ -8,17 +7,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
-@Service
+
 public interface ClienteService {
 
     //CRUD base
-    Page<ClienteDTORes> getAll(Pageable pageable);
+    Page<ClienteDTORes> getAll();
 
     ClienteDTORes update(ClienteDTOReq cliente, Long id);
 
-    void delete(ClienteDTORes cliente, Long id);
+    void delete(Long id);
 
     ClienteDTORes save(ClienteDTOReq cliente);
 

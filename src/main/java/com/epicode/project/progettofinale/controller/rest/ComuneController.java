@@ -1,6 +1,7 @@
 package com.epicode.project.progettofinale.controller.rest;
 
 import com.epicode.project.progettofinale.model.Comune;
+import com.epicode.project.progettofinale.model.dto.response.ComuneDTORes;
 import com.epicode.project.progettofinale.services.ComuneService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +21,17 @@ public class ComuneController {
     private ComuneService comuneSrv;
 
     @GetMapping("getAll")
-   public ResponseEntity<Page<Comune>> getAll(Pageable pageable) {
-        return null;
+   public ResponseEntity<Page<ComuneDTORes>> getAll() {
+        return ResponseEntity.ok(comuneSrv.getAll());
     }
 
     @GetMapping("{name}")
-    public ResponseEntity <Comune> getByName(Pageable pageable, String name) {
-return null;
+    public ResponseEntity <ComuneDTORes> getByName(String name) {
+return ResponseEntity.ok(comuneSrv.findByName(name));
     }
     @GetMapping("{id}")
-    public ResponseEntity <Comune> getById(Pageable pageable, Long id) {
-        return null;
+    public ResponseEntity <ComuneDTORes> getById( Long id) {
+        return ResponseEntity.ok(comuneSrv.findById(id));
     }
 
 }

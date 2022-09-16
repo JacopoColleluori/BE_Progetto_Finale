@@ -2,19 +2,23 @@ package com.epicode.project.progettofinale.repository;
 
 import com.epicode.project.progettofinale.model.Fattura;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface FatturaRepository extends JpaRepository<Fattura,Long> {
-    List<Fattura> findByOrderByClienteRagioneSocialeIgnoreCase(String nome);
-    List<Fattura> findByOrderByStatoNomeIgnoreCase(String nome);
-    List<Fattura> findByOrderByData(LocalDate date);
+@Repository
+public interface FatturaRepository extends JpaRepository<Fattura, Long> {
+    List<Fattura> findByClienteRagioneSocialeIgnoreCaseOrderByClienteRagioneSociale(String nome);
 
-    List<Fattura> findByOrderByAnno(Integer anno);
+    List<Fattura> findByStatoNomeIgnoreCaseOrderByStatoNome(String nome);
 
-    List<Fattura> findByOrderByImportoBetween(BigDecimal importoX, BigDecimal importoY);
+    List<Fattura> findByDataOrderByData(LocalDate date);
+
+    List<Fattura> findByAnnoOrderByAnno(Integer anno);
+
+    List<Fattura> findByImportoBetweenOrderByImporto(Double importoX, Double importoY);
 
 
 }

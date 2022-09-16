@@ -7,11 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class IndirizzoDTOReq {
-    public String via;
-    public int civico;
-    private String localita;
-    private String cap;
+public class TipoDTOReq {
 
-    private String nomeComune;
+    private String tipo;
 }
