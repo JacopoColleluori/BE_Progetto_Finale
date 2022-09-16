@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface FatturaRepository extends JpaRepository<Fattura, Long> {
-    List<Fattura> findByClienteRagioneSocialeIgnoreCaseOrderByClienteRagioneSociale(String nome);
+    List<Fattura> findByClienteRagioneSocialeIgnoreCase(String nome);
 
     List<Fattura> findByStatoNomeIgnoreCaseOrderByStatoNome(String nome);
 
@@ -18,7 +18,7 @@ public interface FatturaRepository extends JpaRepository<Fattura, Long> {
 
     List<Fattura> findByAnnoOrderByAnno(Integer anno);
 
-    List<Fattura> findByImportoBetweenOrderByImporto(Double importoX, Double importoY);
+    List<Fattura> findByImportoBetweenOrderByImporto(BigDecimal importoX, BigDecimal importoY);
 
 
 }

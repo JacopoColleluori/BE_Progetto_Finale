@@ -29,7 +29,7 @@ public interface FatturaService {
 
     Page<FatturaDTORes> filterByAnno(Integer anno);
 
-    Page<FatturaDTORes> filterByRangeImporti(Double importoX, Double importoY);
+    Page<FatturaDTORes> filterByRangeImporti(BigDecimal importoX, BigDecimal importoY);
 
 
 }

@@ -3,11 +3,13 @@ package com.epicode.project.progettofinale.services.impl;
 import com.epicode.project.progettofinale.exception.EpicException;
 import com.epicode.project.progettofinale.model.Fattura;
 import com.epicode.project.progettofinale.model.dto.request.FatturaDTOReq;
+import com.epicode.project.progettofinale.model.dto.response.ClienteDTORes;
 import com.epicode.project.progettofinale.model.dto.response.FatturaDTORes;
 import com.epicode.project.progettofinale.repository.ClienteRepository;
 import com.epicode.project.progettofinale.repository.FatturaRepository;
 import com.epicode.project.progettofinale.repository.StatoRepository;
 import com.epicode.project.progettofinale.services.FatturaService;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class FatturaServiceImpl implements FatturaService {
     @Autowired
     private FatturaRepository fatturaRepository;
@@ -35,9 +38,8 @@ public class FatturaServiceImpl implements FatturaService {
     @Override
     public Page<FatturaDTORes> getAll() {
         List<Fattura> fatture = fatturaRepository.findAll();
-        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fatture, FatturaDTORes.class)).collect(Collectors.toList());
-        Page<FatturaDTORes> page = new PageImpl<>(response);
-        return page;
+        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fattura, FatturaDTORes.class)).collect(Collectors.toList());
+       return new PageImpl<>(response);
     }
 
     @Override
@@ -52,7 +54,6 @@ public class FatturaServiceImpl implements FatturaService {
         if (!statoRepository.existsByNomeIgnoreCase(fattura.getStato().getNome())) {
             throw new EpicException("Il tipo : " + fattura.getStato().getNome() + "non esiste");
         }
-
 
         fattura.setCliente(clienteRepository.findByRagioneSocialeIgnoreCase(fatturaReq.getNomeCliente()).get());
         fattura.setStato(statoRepository.findByNomeIgnoreCase(fatturaReq.getNomeStato()).get());
@@ -93,11 +94,11 @@ public class FatturaServiceImpl implements FatturaService {
 
     @Override
     public Page<FatturaDTORes> filterByCliente(String nome) {
-        List<Fattura> fatture = fatturaRepository.findByClienteRagioneSocialeIgnoreCaseOrderByClienteRagioneSociale(nome);
+        List<Fattura> fatture = fatturaRepository.findByClienteRagioneSocialeIgnoreCase(nome);
         if (fatture.isEmpty()) {
             throw new EpicException("Nessuna fattura trovato per il cliente: " + nome);
         }
-        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fatture, FatturaDTORes.class)).collect(Collectors.toList());
+        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fattura, FatturaDTORes.class)).collect(Collectors.toList());
         Page<FatturaDTORes> page = new PageImpl<>(response);
         return page;
     }
@@ -108,7 +109,7 @@ public class FatturaServiceImpl implements FatturaService {
         if (fatture.isEmpty()) {
             throw new EpicException("Nessuna fattura trovato per lo stato: " + stato);
         }
-        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fatture, FatturaDTORes.class)).collect(Collectors.toList());
+        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fattura, FatturaDTORes.class)).collect(Collectors.toList());
         Page<FatturaDTORes> page = new PageImpl<>(response);
         return page;
     }
@@ -119,7 +120,7 @@ public class FatturaServiceImpl implements FatturaService {
         if (fatture.isEmpty()) {
             throw new EpicException("Nessuna fattura trovato per la data: " + date.toString());
         }
-        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fatture, FatturaDTORes.class)).collect(Collectors.toList());
+        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fattura, FatturaDTORes.class)).collect(Collectors.toList());
         Page<FatturaDTORes> page = new PageImpl<>(response);
         return page;
     }
@@ -130,18 +131,18 @@ public class FatturaServiceImpl implements FatturaService {
         if (fatture.isEmpty()) {
             throw new EpicException("Nessuna fattura trovato per l'anno: " + anno);
         }
-        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fatture, FatturaDTORes.class)).collect(Collectors.toList());
+        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fattura, FatturaDTORes.class)).collect(Collectors.toList());
         Page<FatturaDTORes> page = new PageImpl<>(response);
         return page;
     }
 
     @Override
-    public Page<FatturaDTORes> filterByRangeImporti(Double importoX, Double importoY) {
+    public Page<FatturaDTORes> filterByRangeImporti(BigDecimal importoX, BigDecimal importoY) {
         List<Fattura> fatture = fatturaRepository.findByImportoBetweenOrderByImporto(importoX, importoY);
         if (fatture.isEmpty()) {
             throw new EpicException("Nessuna fattura trovato per il range: " + importoX + "-" + importoY);
         }
-        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fatture, FatturaDTORes.class)).collect(Collectors.toList());
+        List<FatturaDTORes> response = fatture.stream().map(fattura -> mapper.map(fattura, FatturaDTORes.class)).collect(Collectors.toList());
         Page<FatturaDTORes> page = new PageImpl<>(response);
         return page;
     }

@@ -26,6 +26,6 @@ public class FatturaDTORes {
 
     private StatoDTORes stato;
 
-    private Cliente cliente;
+    private String  clienteRagioneSociale;
 
 }

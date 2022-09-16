@@ -9,7 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ComuneDTOReq {
     private String nomeComune;
-
-
     private ProvinciaDTOReq provincia;
 }

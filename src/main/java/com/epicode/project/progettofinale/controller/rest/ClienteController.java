@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +33,12 @@ public class ClienteController {
         return ResponseEntity.ok(clienteSrv.filterByFatturato(fatturatoX, FatturatoY));
     }
     @GetMapping("filtroPerDataInserimento/{data}")
-    public ResponseEntity<Page<ClienteDTORes>> filterByDataInserimento( @PathVariable LocalDate data){
+    public ResponseEntity<Page<ClienteDTORes>> filterByDataInserimento( @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate data){
         return ResponseEntity.ok(clienteSrv.filterByDataInserimento(data));
     }
 
     @GetMapping("filtroPerDataUltimoContatto/{data}")
-    public ResponseEntity<Page<ClienteDTORes>> filterByDataUltimoContatto( @PathVariable LocalDate data){
+    public ResponseEntity<Page<ClienteDTORes>> filterByDataUltimoContatto( @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate data){
         return ResponseEntity.ok(clienteSrv.filterByDataUltimoContatto(data));
     }
     @GetMapping("filtroPerNomeParziale/{nome}")

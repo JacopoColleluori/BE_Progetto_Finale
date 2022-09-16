@@ -54,16 +54,16 @@ public class DataInitRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        loadUtente();
-        log.info("Utenti test caricati");
-        loadProvincia();
-        log.info("Province caricate");
-        loadComune();
-        log.info("Comuni Caricati");
-        initStato();
-        log.info("stati inizializzati");
-        initTipo();
-        log.info("tipi inizializzati");
+//        loadUtente();
+//        log.info("Utenti test caricati");
+//        loadProvincia();
+//        log.info("Province caricate");
+//        loadComune();
+//        log.info("Comuni Caricati");
+//        initStato();
+//        log.info("stati inizializzati");
+//        initTipo();
+//        log.info("tipi inizializzati");
 
 
     }

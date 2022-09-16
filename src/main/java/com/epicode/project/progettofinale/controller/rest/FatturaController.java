@@ -6,6 +6,7 @@ import com.epicode.project.progettofinale.services.FatturaService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class FatturaController {
     }
 
     @GetMapping("filterByData/{data}")
-    ResponseEntity<Page<FatturaDTORes>> filterByData( @PathVariable LocalDate data ){
+    ResponseEntity<Page<FatturaDTORes>> filterByData( @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate data ){
    return ResponseEntity.ok(fatturaSrv.filterByData(data));
     }
     @GetMapping("filterByAnno/{anno}")
@@ -43,7 +44,7 @@ public class FatturaController {
         return ResponseEntity.ok(fatturaSrv.filterByAnno(anno));
     }
     @GetMapping("filterByImporti/{importoX}/{importoY}")
-    ResponseEntity<Page<FatturaDTORes>> filterByImporti( @PathVariable Double importoX,@PathVariable Double importoY ){
+    ResponseEntity<Page<FatturaDTORes>> filterByImporti( @PathVariable BigDecimal importoX,@PathVariable BigDecimal importoY ){
         return ResponseEntity.ok(fatturaSrv.filterByRangeImporti(importoX,importoY));
     }
 
@@ -55,5 +56,11 @@ public class FatturaController {
     @PutMapping("update/{id}")
     ResponseEntity<FatturaDTORes> update(@RequestBody FatturaDTOReq fatturaReq,@PathVariable Long id){
         return new ResponseEntity<FatturaDTORes>(fatturaSrv.update(fatturaReq,id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("delete/{id}")
+    ResponseEntity<String> delete(@PathVariable Long id){
+        fatturaSrv.delete(id);
+        return new ResponseEntity<>("Fattura eliminata",HttpStatus.ACCEPTED);
     }
 }
