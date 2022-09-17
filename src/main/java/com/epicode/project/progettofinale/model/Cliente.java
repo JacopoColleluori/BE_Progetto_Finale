@@ -2,7 +2,6 @@ package com.epicode.project.progettofinale.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -34,7 +33,7 @@ public class Cliente {
     private String cognomeContatto;
     private Long telefonoContatto;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente",cascade = CascadeType.REMOVE)
     private List<Fattura> fatture;
     @ManyToOne(cascade = CascadeType.ALL)
     private Indirizzo sedeLegale;

@@ -21,7 +21,7 @@ public class Fattura {
     private Integer anno;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate data;
-
+    private Integer numero;
     private BigDecimal importo;
     @ManyToOne
     private Stato stato;

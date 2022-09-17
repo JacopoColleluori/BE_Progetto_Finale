@@ -18,7 +18,7 @@ public class FatturaDTORes {
 
 
     private Integer anno;
-
+    private Integer numero;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate data;
 
@@ -27,5 +27,4 @@ public class FatturaDTORes {
     private StatoDTORes stato;
 
     private String  clienteRagioneSociale;
-
 }

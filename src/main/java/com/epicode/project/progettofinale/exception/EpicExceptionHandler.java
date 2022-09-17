@@ -14,7 +14,7 @@ public class EpicExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EpicException.class)
     protected ResponseEntity<Object> handleEpicException(EpicException exc){
-        ApiError error=new ApiError(exc.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        ApiError error=new ApiError(exc.getMessage(), HttpStatus.BAD_REQUEST);
 
         return buildResponseEntity(error);
 

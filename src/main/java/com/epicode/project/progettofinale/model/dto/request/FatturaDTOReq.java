@@ -16,7 +16,7 @@ public class FatturaDTOReq {
     private Integer anno;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate data;
-
+    private Integer numero;
     private BigDecimal importo;
 
     private String nomeStato;
